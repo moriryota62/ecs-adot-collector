@@ -14,7 +14,6 @@ module "vpc" {
 module "ecs-cluster" {
   source = "./ecs-cluster"
 
-
   base_name          = local.base_name
   instance_type      = "t3.medium"
   max_size           = 1

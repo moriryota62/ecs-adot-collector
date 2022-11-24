@@ -9,35 +9,35 @@ resource "aws_ecs_task_definition" "this" {
 
   container_definitions = jsonencode([
     {
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "secretOptions": [],
-        "options": {
-          "awslogs-group": "/ecs/${var.base_name}-${var.service_name}",
-          "awslogs-region": "${data.aws_region.current.name}",
-          "awslogs-create-group": "True",
-          "awslogs-stream-prefix": "${var.service_name}"
+      "logConfiguration" : {
+        "logDriver" : "awslogs",
+        "secretOptions" : [],
+        "options" : {
+          "awslogs-group" : "/ecs/${var.base_name}-${var.service_name}",
+          "awslogs-region" : "${data.aws_region.current.name}",
+          "awslogs-create-group" : "True",
+          "awslogs-stream-prefix" : "${var.service_name}"
         }
       },
-      "image": "nginx",
-      "name": "nginx"
+      "image" : "nginx",
+      "name" : "nginx"
     },
     {
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "secretOptions": [],
-        "options": {
-          "awslogs-group": "/ecs/${var.base_name}-${var.service_name}",
-          "awslogs-region": "${data.aws_region.current.name}",
-          "awslogs-create-group": "True",
-          "awslogs-stream-prefix": "${var.service_name}"
+      "logConfiguration" : {
+        "logDriver" : "awslogs",
+        "secretOptions" : [],
+        "options" : {
+          "awslogs-group" : "/ecs/${var.base_name}-${var.service_name}",
+          "awslogs-region" : "${data.aws_region.current.name}",
+          "awslogs-create-group" : "True",
+          "awslogs-stream-prefix" : "${var.service_name}"
         }
       },
-      "command": [
+      "command" : [
         "--config=/etc/ecs/container-insights/custom-config.yaml"
       ],
-      "name": "adot-collector",
-      "image": "ryotamori/aws-otel-collector:20221106-1646"
+      "name" : "adot-collector",
+      "image" : "ryotamori/aws-otel-collector:20221106-1646"
     }
   ])
 

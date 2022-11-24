@@ -9,61 +9,61 @@ resource "aws_ecs_task_definition" "this" {
 
   container_definitions = jsonencode([
     {
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "secretOptions": [],
-        "options": {
-          "awslogs-group": "/ecs/${var.base_name}-${var.service_name}",
-          "awslogs-region": "${data.aws_region.current.name}",
-          "awslogs-create-group": "True",
-          "awslogs-stream-prefix": "${var.service_name}"
+      "logConfiguration" : {
+        "logDriver" : "awslogs",
+        "secretOptions" : [],
+        "options" : {
+          "awslogs-group" : "/ecs/${var.base_name}-${var.service_name}",
+          "awslogs-region" : "${data.aws_region.current.name}",
+          "awslogs-create-group" : "True",
+          "awslogs-stream-prefix" : "${var.service_name}"
         }
       },
-      "command": [
+      "command" : [
         "--config=/etc/ecs/otel-instance-metrics-config.yaml"
       ],
-      "cpu": 0,
-      "environment": [
+      "cpu" : 0,
+      "environment" : [
         {
-          "name": "USE_DEFAULT_CONFIG",
-          "value": "True"
+          "name" : "USE_DEFAULT_CONFIG",
+          "value" : "True"
         }
       ],
-      "mountPoints": [
+      "mountPoints" : [
         {
-          "readOnly": true,
-          "containerPath": "/rootfs/proc",
-          "sourceVolume": "proc"
+          "readOnly" : true,
+          "containerPath" : "/rootfs/proc",
+          "sourceVolume" : "proc"
         },
         {
-          "readOnly": true,
-          "containerPath": "/rootfs/dev",
-          "sourceVolume": "dev"
+          "readOnly" : true,
+          "containerPath" : "/rootfs/dev",
+          "sourceVolume" : "dev"
         },
         {
-          "readOnly": true,
-          "containerPath": "/sys/fs/cgroup",
-          "sourceVolume": "al2_cgroup"
+          "readOnly" : true,
+          "containerPath" : "/sys/fs/cgroup",
+          "sourceVolume" : "al2_cgroup"
         },
         {
-          "readOnly": true,
-          "containerPath": "/cgroup",
-          "sourceVolume": "al1_cgroup"
+          "readOnly" : true,
+          "containerPath" : "/cgroup",
+          "sourceVolume" : "al1_cgroup"
         },
         {
-          "readOnly": true,
-          "containerPath": "/rootfs/sys/fs/cgroup",
-          "sourceVolume": "al2_cgroup"
+          "readOnly" : true,
+          "containerPath" : "/rootfs/sys/fs/cgroup",
+          "sourceVolume" : "al2_cgroup"
         },
         {
-          "readOnly": true,
-          "containerPath": "/rootfs/cgroup",
-          "sourceVolume": "al1_cgroup"
+          "readOnly" : true,
+          "containerPath" : "/rootfs/cgroup",
+          "sourceVolume" : "al1_cgroup"
         }
       ],
-      "image": "amazon/aws-otel-collector",
-      "essential": true,
-      "name": "aws-collector"
+      "image" : "amazon/aws-otel-collector",
+      "essential" : true,
+      "name" : "aws-collector"
     }
   ])
 
